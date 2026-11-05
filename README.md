@@ -1,2 +1,2 @@
-# pawsly-mockup
-Pawsly mobile app mockup prototype
+# PetIt
+PetIt — εφαρμογή φροντίδας κατοικιδίων με δυνατότητα κλεισίματος ραντεβού σε κτηνίατρο και κομμωτήριο ζώων.
