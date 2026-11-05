@@ -3,609 +3,342 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pawsly Mockup</title>
+  <title>Pawsly — φροντίδα κατοικιδίων</title>
   <style>
     * { box-sizing: border-box; }
     html, body {
       margin: 0;
-      height: 100%;
+      min-height: 100%;
       font-family: Arial, Helvetica, sans-serif;
       background: linear-gradient(135deg, #edf3ff 0%, #f7f9fd 100%);
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 20px;
+      color: #111827;
     }
-
+    button, input, select, textarea { font: inherit; }
+    button { cursor: pointer; }
     .phone {
       width: 390px;
       height: 844px;
       background: #fff;
       border-radius: 34px;
       padding: 12px;
-      box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+      box-shadow: 0 30px 60px rgba(0,0,0,.15);
       border: 1px solid #e9edf4;
-      position: relative;
-    }
-
-    .notch {
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 150px;
-      height: 26px;
-      background: #111827;
-      border-radius: 0 0 18px 18px;
-    }
-
-    .screen {
-      width: 100%;
-      height: 100%;
-      background: #f7f9fd;
-      border-radius: 26px;
-      padding: 30px 16px 14px;
       position: relative;
       overflow: hidden;
     }
-
-    .topbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 8px;
-      margin-bottom: 18px;
+    .notch {
+      position: absolute; z-index: 4; top: 0; left: 50%; transform: translateX(-50%);
+      width: 150px; height: 26px; background: #111827; border-radius: 0 0 18px 18px;
     }
-
-    .brand {
-      font-size: 24px;
-      font-weight: 800;
-      color: #111827;
+    .screen {
+      width: 100%; height: 100%; background: #f7f9fd; border-radius: 26px;
+      padding: 30px 16px 14px; position: relative; overflow: hidden;
     }
-
-    .menu {
-      width: 22px;
-      height: 18px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .menu span {
-      display: block;
-      width: 100%;
-      height: 2px;
-      background: #374151;
-      border-radius: 2px;
-    }
-
-    .welcome {
-      font-size: 12px;
-      color: #6b7280;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-
-    .heading {
-      font-size: 28px;
-      line-height: 1.2;
-      margin: 0 0 18px;
-      color: #111827;
-      font-weight: 800;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-bottom: 18px;
-    }
-
+    .screen-2 { display: none; overflow-y: auto; padding-bottom: 96px; scrollbar-width: none; }
+    .screen-2::-webkit-scrollbar { display: none; }
+    .screen-2.active { display: block; }
+    .screen-1.hidden { display: none; }
+    .topbar, .topbar2 { display: flex; justify-content: space-between; align-items: center; margin: 8px 0 18px; }
+    .brand { font-size: 24px; font-weight: 800; }
+    .menu { width: 22px; height: 18px; display: flex; flex-direction: column; justify-content: space-between; }
+    .menu span { width: 100%; height: 2px; background: #374151; border-radius: 2px; }
+    .welcome { font-size: 12px; color: #6b7280; font-weight: 700; margin-bottom: 8px; }
+    .heading { font-size: 28px; line-height: 1.2; margin: 0 0 18px; font-weight: 800; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 18px; }
     .pet-card {
-      position: relative;
-      border-radius: 22px;
-      border: 1px solid #edf0f5;
-      min-height: 126px;
-      padding: 16px 10px 10px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 5px 14px rgba(15, 23, 42, 0.04);
-      background: white;
+      position: relative; border-radius: 22px; border: 1px solid #edf0f5; min-height: 126px;
+      padding: 16px 10px 10px; display: flex; flex-direction: column; align-items: center;
+      justify-content: center; box-shadow: 0 5px 14px rgba(15,23,42,.04); background: white; cursor: pointer;
     }
-
-    .pet-card.selected {
-      border: 2px solid #2f6fed;
-      background: #f2f8ff;
-    }
-
-    .pet-card:nth-child(1) { background: linear-gradient(180deg, #f9fbff 0%, #eef5ff 100%); }
-    .pet-card:nth-child(2) { background: linear-gradient(180deg, #faf7ff 0%, #f3ecff 100%); }
-    .pet-card:nth-child(3) { background: linear-gradient(180deg, #fffaf3 0%, #fff2d9 100%); }
-    .pet-card:nth-child(4) { background: linear-gradient(180deg, #f1fffd 0%, #defcf8 100%); }
-
-    .pet-emoji {
-      font-size: 34px;
-      margin-bottom: 8px;
-    }
-
-    .pet-name {
-      font-size: 15px;
-      font-weight: 700;
-      color: #111827;
-      text-align: center;
-    }
-
-    .pet-meta {
-      font-size: 11px;
-      color: #6b7280;
-      margin-top: 2px;
-    }
-
-    .check {
-      position: absolute;
-      right: 10px;
-      top: 10px;
-      width: 22px;
-      height: 22px;
-      background: #2f6fed;
-      color: white;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 14px;
-      font-weight: 700;
-    }
-
+    .pet-card.selected { border: 2px solid #2f6fed; background: #f2f8ff; }
+    .pet-card:nth-child(1) { background: linear-gradient(180deg,#f9fbff,#eef5ff); }
+    .pet-card:nth-child(2) { background: linear-gradient(180deg,#faf7ff,#f3ecff); }
+    .pet-card:nth-child(3) { background: linear-gradient(180deg,#fffaf3,#fff2d9); }
+    .pet-card:nth-child(4) { background: linear-gradient(180deg,#f1fffd,#defcf8); }
+    .pet-emoji { font-size: 34px; margin-bottom: 8px; }
+    .pet-name { font-size: 15px; font-weight: 700; text-align: center; }
+    .pet-meta { font-size: 11px; color: #6b7280; margin-top: 2px; }
+    .check { width: 20px; height: 20px; border-radius: 50%; background: #2f6fed; color: white; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex: 0 0 auto; }
+    .pet-card .check { position: absolute; right: 10px; top: 10px; }
     .cta {
-      position: absolute;
-      left: 16px;
-      right: 16px;
-      bottom: 20px;
-      height: 58px;
-      border: none;
-      border-radius: 18px;
-      background: linear-gradient(135deg, #2f6fed 0%, #5d7ff5 100%);
-      color: white;
-      font-size: 18px;
-      font-weight: 700;
-      box-shadow: 0 12px 22px rgba(47, 111, 237, 0.25);
-      cursor: pointer;
+      position: absolute; left: 16px; right: 16px; bottom: 20px; height: 58px; border: none;
+      border-radius: 18px; background: linear-gradient(135deg,#2f6fed,#5d7ff5); color: white;
+      font-size: 18px; font-weight: 700; box-shadow: 0 12px 22px rgba(47,111,237,.25);
     }
-
-    .screen-2 {
-      display: none;
-    }
-
-    .screen-2.active {
-      display: block;
-    }
-
-    .screen-1.hidden {
-      display: none;
-    }
-
-    .topbar2 {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-top: 8px;
-      margin-bottom: 18px;
-    }
-
-    .back {
-      font-size: 28px;
-      color: #1f2937;
-      font-weight: 700;
-      line-height: 1;
-    }
-
-    .pet-title {
-      font-size: 18px;
-      color: #111827;
-      font-weight: 700;
-    }
-
-    .plus {
-      font-size: 30px;
-      color: #1f2937;
-      font-weight: 400;
-      line-height: 1;
-    }
-
-    .hero {
-      background: linear-gradient(135deg, #2f6fed 0%, #6b7df6 100%);
-      border-radius: 24px;
-      padding: 18px 16px;
-      box-shadow: 0 12px 20px rgba(47,111,237,0.18);
-      color: white;
-      margin-bottom: 16px;
-    }
-
-    .hero-row {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 12px;
-    }
-
-    .pet-icon {
-      width: 50px;
-      height: 50px;
-      border-radius: 16px;
-      background: rgba(255,255,255,0.18);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 28px;
-    }
-
-    .hero-name {
-      font-size: 24px;
-      font-weight: 800;
-      margin: 0;
-    }
-
-    .pet-meta {
-      font-size: 12px;
-      opacity: 0.88;
-      margin-top: 3px;
-    }
-
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      margin-top: 12px;
-    }
-
-    .stat {
-      background: rgba(255,255,255,0.12);
-      border: 1px solid rgba(255,255,255,0.15);
-      border-radius: 14px;
-      padding: 10px 8px;
-      text-align: center;
-    }
-
-    .stat-label {
-      font-size: 10px;
-      opacity: 0.8;
-      margin-bottom: 4px;
-    }
-
-    .stat-value {
-      font-size: 18px;
-      font-weight: 800;
-    }
-
-    .section-title {
-      font-size: 15px;
-      color: #111827;
-      font-weight: 800;
-      margin: 18px 0 10px;
-    }
-
-    .summary-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-    }
-
-    .summary-card {
-      background: white;
-      border-radius: 16px;
-      border: 1px solid #edf0f5;
-      box-shadow: 0 6px 14px rgba(15,23,42,0.04);
-      padding: 12px 8px;
-      text-align: center;
-    }
-
-    .summary-card .label {
-      font-size: 11px;
-      color: #6b7280;
-      margin-bottom: 8px;
-      font-weight: 600;
-    }
-
-    .summary-card .value {
-      font-size: 20px;
-      font-weight: 800;
-      color: #111827;
-    }
-
-    .tasks {
-      background: white;
-      border-radius: 18px;
-      border: 1px solid #edf0f5;
-      box-shadow: 0 6px 14px rgba(15,23,42,0.04);
-      padding: 12px 12px 6px;
-      margin-top: 12px;
-    }
-
-    .task-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 10px 0;
-      border-bottom: 1px solid #f0f2f5;
-      color: #1f2937;
-      font-size: 14px;
-      font-weight: 600;
-    }
-
-    .task-item:last-child {
-      border-bottom: none;
-    }
-
-    .check {
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 12px;
-      font-weight: 700;
-      background: #2f6fed;
-    }
-
-    .pending {
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #6b7280;
-      font-size: 12px;
-      font-weight: 700;
-      background: #e5e7eb;
-    }
-
-    .quick {
-      margin-top: 16px;
-    }
-
-    .quick-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
-      margin-top: 8px;
-    }
-
-    .quick-btn {
-      background: white;
-      border: 1px solid #edf0f5;
-      border-radius: 14px;
-      box-shadow: 0 6px 12px rgba(15,23,42,0.03);
-      padding: 12px 6px 10px;
-      text-align: center;
-      font-size: 12px;
-      font-weight: 700;
-      color: #111827;
-    }
-
-    .quick-icon {
-      font-size: 20px;
-      display: block;
-      margin-bottom: 6px;
-    }
-
-    .bottom-nav {
-      position: absolute;
-      left: 12px;
-      right: 12px;
-      bottom: 12px;
-      height: 68px;
-      background: rgba(255,255,255,0.95);
-      border: 1px solid #edf0f5;
-      border-radius: 20px;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      align-items: center;
-      box-shadow: 0 -8px 18px rgba(15,23,42,0.04);
-      backdrop-filter: blur(8px);
-    }
-
-    .nav-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      color: #6b7280;
-      font-size: 11px;
-      font-weight: 700;
-      gap: 4px;
-      height: 100%;
-    }
-
-    .nav-item.active {
-      color: #2f6fed;
-    }
-
-    .nav-icon {
-      font-size: 19px;
-      line-height: 1;
-    }
-
+    .back, .plus { border: 0; background: transparent; padding: 0; color: #1f2937; line-height: 1; }
+    .back { font-size: 28px; font-weight: 700; }
+    .pet-title { font-size: 18px; font-weight: 700; }
+    .plus { font-size: 30px; font-weight: 400; }
+    .hero { background: linear-gradient(135deg,#2f6fed,#6b7df6); border-radius: 24px; padding: 18px 16px; box-shadow: 0 12px 20px rgba(47,111,237,.18); color: white; margin-bottom: 16px; }
+    .hero-row { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+    .pet-icon { width: 50px; height: 50px; border-radius: 16px; background: rgba(255,255,255,.18); display: flex; align-items: center; justify-content: center; font-size: 28px; }
+    .hero-name { font-size: 24px; font-weight: 800; margin: 0; }
+    .hero .pet-meta { color: white; opacity: .88; font-size: 12px; margin-top: 3px; }
+    .stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-top: 12px; }
+    .stat { background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.15); border-radius: 14px; padding: 10px 8px; text-align: center; }
+    .stat-label { font-size: 10px; opacity: .8; margin-bottom: 4px; }
+    .stat-value { font-size: 18px; font-weight: 800; }
+    .section-title { font-size: 15px; font-weight: 800; margin: 18px 0 10px; }
+    .summary-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
+    .summary-card { background: white; border-radius: 16px; border: 1px solid #edf0f5; box-shadow: 0 6px 14px rgba(15,23,42,.04); padding: 12px 8px; text-align: center; }
+    .summary-card .label { font-size: 11px; color: #6b7280; margin-bottom: 8px; font-weight: 600; }
+    .summary-card .value { font-size: 20px; font-weight: 800; }
+    .tasks, .appointment-list { background: white; border-radius: 18px; border: 1px solid #edf0f5; box-shadow: 0 6px 14px rgba(15,23,42,.04); padding: 8px 12px; }
+    .task-item { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid #f0f2f5; color: #1f2937; font-size: 14px; font-weight: 600; }
+    .task-item:last-child { border-bottom: none; }
+    .pending { width: 18px; height: 18px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; color: #6b7280; font-size: 12px; font-weight: 700; background: #e5e7eb; flex: 0 0 auto; }
+    .quick { margin-top: 16px; }
+    .quick-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 8px; margin-top: 8px; }
+    .quick-btn { background: white; border: 1px solid #edf0f5; border-radius: 14px; box-shadow: 0 6px 12px rgba(15,23,42,.03); padding: 11px 4px 10px; text-align: center; font-size: 11px; font-weight: 700; color: #111827; }
+    .quick-btn:hover, .pet-card:hover { border-color: #9ab8ff; }
+    .quick-icon { font-size: 20px; display: block; margin-bottom: 6px; }
+    .appointment-card { display: flex; align-items: flex-start; gap: 10px; padding: 12px 0; border-bottom: 1px solid #f0f2f5; }
+    .appointment-card:last-child { border-bottom: 0; }
+    .appointment-emoji { width: 38px; height: 38px; border-radius: 12px; display: grid; place-items: center; background: #eef4ff; font-size: 20px; flex: 0 0 auto; }
+    .appointment-info { flex: 1; min-width: 0; }
+    .appointment-name { font-size: 13px; font-weight: 800; }
+    .appointment-details { color: #6b7280; font-size: 11px; line-height: 1.5; margin-top: 3px; }
+    .cancel-btn { border: 0; background: #fff1f2; color: #be123c; border-radius: 9px; font-size: 10px; font-weight: 700; padding: 7px; }
+    .empty-state { color: #6b7280; font-size: 12px; line-height: 1.5; padding: 12px 2px; }
+    .bottom-nav { position: absolute; left: 12px; right: 12px; bottom: 12px; height: 68px; background: rgba(255,255,255,.96); border: 1px solid #edf0f5; border-radius: 20px; display: grid; grid-template-columns: repeat(4,1fr); align-items: center; box-shadow: 0 -8px 18px rgba(15,23,42,.04); backdrop-filter: blur(8px); z-index: 2; }
+    .nav-item { border: 0; background: transparent; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #6b7280; font-size: 10px; font-weight: 700; gap: 4px; height: 100%; }
+    .nav-item.active { color: #2f6fed; }
+    .nav-icon { font-size: 19px; line-height: 1; }
+    .modal-backdrop { display: none; position: absolute; inset: 0; z-index: 5; background: rgba(17,24,39,.48); align-items: flex-end; justify-content: center; }
+    .modal-backdrop.open { display: flex; }
+    .booking-modal { width: 100%; max-height: 92%; overflow-y: auto; background: #f7f9fd; border-radius: 26px 26px 14px 14px; padding: 22px 18px 24px; box-shadow: 0 -10px 30px rgba(0,0,0,.15); }
+    .modal-heading { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; }
+    .modal-heading h2 { font-size: 21px; margin: 0; }
+    .close-modal { border: 0; background: #e9eef8; color: #374151; width: 32px; height: 32px; border-radius: 50%; font-size: 20px; }
+    .modal-subtitle { color: #6b7280; font-size: 12px; margin: 5px 0 16px; }
+    .field { margin: 12px 0; }
+    .field label { display: block; font-size: 12px; font-weight: 700; margin-bottom: 6px; color: #374151; }
+    .field input, .field select, .field textarea { width: 100%; border: 1px solid #dfe5ef; border-radius: 12px; background: white; padding: 12px; color: #111827; outline: none; }
+    .field textarea { min-height: 68px; resize: vertical; }
+    .field input:focus, .field select:focus, .field textarea:focus { border-color: #2f6fed; box-shadow: 0 0 0 3px rgba(47,111,237,.12); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .submit-booking { width: 100%; border: 0; border-radius: 14px; padding: 14px; margin-top: 8px; color: white; font-weight: 800; background: linear-gradient(135deg,#2f6fed,#5d7ff5); box-shadow: 0 10px 20px rgba(47,111,237,.2); }
+    .toast { position: absolute; z-index: 7; left: 24px; right: 24px; bottom: 92px; background: #111827; color: white; border-radius: 12px; padding: 12px 14px; text-align: center; font-size: 12px; opacity: 0; pointer-events: none; transform: translateY(8px); transition: .2s; }
+    .toast.show { opacity: 1; transform: translateY(0); }
     @media (max-width: 420px) {
-      body {
-        padding: 0;
-      }
-
-      .phone {
-        width: 100vw;
-        height: 100vh;
-        border-radius: 0;
-        box-shadow: none;
-      }
-
-      .screen {
-        border-radius: 0;
-      }
+      body { padding: 0; }
+      .phone { width: 100vw; height: 100dvh; border-radius: 0; box-shadow: none; padding: 12px; }
+      .screen { border-radius: 0; }
+      .modal-backdrop { border-radius: 0; }
     }
   </style>
 </head>
 <body>
   <div class="phone">
     <div class="notch"></div>
-
     <div class="screen screen-1">
-      <div class="topbar">
-        <div class="brand">Pawsly</div>
-        <div class="menu">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
+      <div class="topbar"><div class="brand">Pawsly</div><div class="menu" aria-label="Μενού"><span></span><span></span><span></span></div></div>
+      <div class="welcome">Καλώς ήρθες ξανά</div>
+      <h1 class="heading">Τι κατοικίδιο έχεις;</h1>
+      <div class="grid" id="petGrid">
+        <button class="pet-card selected" type="button"><span class="check">✓</span><span class="pet-emoji">🐶</span><span class="pet-name">Σκύλος</span><span class="pet-meta">Η επιλογή σου</span></button>
+        <button class="pet-card" type="button"><span class="pet-emoji">🐱</span><span class="pet-name">Γάτα</span><span class="pet-meta">8 κατοικίδια</span></button>
+        <button class="pet-card" type="button"><span class="pet-emoji">🐹</span><span class="pet-name">Μικρό ζώο</span><span class="pet-meta">3 κατοικίδια</span></button>
+        <button class="pet-card" type="button"><span class="pet-emoji">🐠</span><span class="pet-name">Ψάρι</span><span class="pet-meta">5 κατοικίδια</span></button>
       </div>
-
-      <div class="welcome">Welcome back</div>
-      <h1 class="heading">Which pet do you have?</h1>
-
-      <div class="grid">
-        <div class="pet-card selected">
-          <div class="check">✓</div>
-          <div class="pet-emoji">🐶</div>
-          <div class="pet-name">Dog</div>
-          <div class="pet-meta">Good fit</div>
-        </div>
-
-        <div class="pet-card">
-          <div class="pet-emoji">🐱</div>
-          <div class="pet-name">Cat</div>
-          <div class="pet-meta">8 pets</div>
-        </div>
-
-        <div class="pet-card">
-          <div class="pet-emoji">🐹</div>
-          <div class="pet-name">Small pet</div>
-          <div class="pet-meta">3 pets</div>
-        </div>
-
-        <div class="pet-card">
-          <div class="pet-emoji">🐠</div>
-          <div class="pet-name">Fish</div>
-          <div class="pet-meta">5 pets</div>
-        </div>
-      </div>
-
-      <button class="cta" id="continueBtn">Continue</button>
+      <button class="cta" id="continueBtn">Συνέχεια</button>
     </div>
 
     <div class="screen screen-2">
       <div class="topbar2">
-        <div class="back">←</div>
-        <div class="pet-title">Milo</div>
-        <div class="plus">＋</div>
+        <button class="back" id="backBtn" aria-label="Πίσω">←</button>
+        <div class="pet-title">Ο Milo μου</div>
+        <button class="plus" id="topBookBtn" aria-label="Κλείσε ραντεβού">＋</button>
       </div>
-
       <div class="hero">
-        <div class="hero-row">
-          <div class="pet-icon">🐶</div>
-          <div>
-            <h2 class="hero-name">Milo</h2>
-            <div class="pet-meta">3 years old • 12.5 kg</div>
-          </div>
-        </div>
-
+        <div class="hero-row"><div class="pet-icon">🐶</div><div><h2 class="hero-name">Milo</h2><div class="pet-meta">3 ετών • 12,5 kg</div></div></div>
         <div class="stats">
-          <div class="stat">
-            <div class="stat-label">Meals</div>
-            <div class="stat-value">2/3</div>
-          </div>
-          <div class="stat">
-            <div class="stat-label">Walks</div>
-            <div class="stat-value">1/2</div>
-          </div>
-          <div class="stat">
-            <div class="stat-label">Health</div>
-            <div class="stat-value">Good</div>
-          </div>
+          <div class="stat"><div class="stat-label">Γεύματα</div><div class="stat-value">2/3</div></div>
+          <div class="stat"><div class="stat-label">Βόλτες</div><div class="stat-value">1/2</div></div>
+          <div class="stat"><div class="stat-label">Υγεία</div><div class="stat-value">Καλή</div></div>
         </div>
       </div>
-
-      <div class="section-title">Summary</div>
-
+      <div class="section-title">Η σημερινή εικόνα</div>
       <div class="summary-grid">
-        <div class="summary-card">
-          <div class="label">Meals</div>
-          <div class="value">2/3</div>
-        </div>
-        <div class="summary-card">
-          <div class="label">Walks</div>
-          <div class="value">1/2</div>
-        </div>
-        <div class="summary-card">
-          <div class="label">Health</div>
-          <div class="value">Good</div>
-        </div>
+        <div class="summary-card"><div class="label">Γεύματα</div><div class="value">2/3</div></div>
+        <div class="summary-card"><div class="label">Βόλτες</div><div class="value">1/2</div></div>
+        <div class="summary-card"><div class="label">Υγεία</div><div class="value">Καλή</div></div>
       </div>
-
-      <div class="section-title">Today's tasks</div>
-
+      <div class="section-title">Τα ραντεβού μου <button id="newBookingInline" style="float:right;border:0;background:transparent;color:#2f6fed;font-size:12px;font-weight:800;padding:0">＋ Νέο</button></div>
+      <div class="appointment-list" id="appointmentList" aria-live="polite"></div>
+      <div class="section-title">Οι σημερινές υποχρεώσεις</div>
       <div class="tasks">
-        <div class="task-item">
-          <div class="check">✓</div>
-          <div>Food &amp; water</div>
-        </div>
-        <div class="task-item">
-          <div class="check">✓</div>
-          <div>Morning walk</div>
-        </div>
-        <div class="task-item">
-          <div class="check">✓</div>
-          <div>Medication</div>
-        </div>
-        <div class="task-item">
-          <div class="pending">•</div>
-          <div>Grooming appointment</div>
-        </div>
+        <div class="task-item"><span class="check">✓</span><span>Φαγητό και νερό</span></div>
+        <div class="task-item"><span class="check">✓</span><span>Πρωινή βόλτα</span></div>
+        <div class="task-item"><span class="check">✓</span><span>Φαρμακευτική αγωγή</span></div>
+        <div class="task-item"><span class="pending">•</span><span>Ραντεβού περιποίησης</span></div>
       </div>
-
       <div class="quick">
-        <div class="section-title">Quick actions</div>
+        <div class="section-title">Γρήγορες ενέργειες</div>
         <div class="quick-grid">
-          <div class="quick-btn"><span class="quick-icon">🍽️</span>Feed</div>
-          <div class="quick-btn"><span class="quick-icon">🚶</span>Walk</div>
-          <div class="quick-btn"><span class="quick-icon">🩺</span>Vet</div>
-          <div class="quick-btn"><span class="quick-icon">🧴</span>Care</div>
+          <button class="quick-btn" type="button" data-service="grooming"><span class="quick-icon">🍽️</span>Ταΐσμα</button>
+          <button class="quick-btn" type="button" data-service="grooming"><span class="quick-icon">🚶</span>Βόλτα</button>
+          <button class="quick-btn" type="button" data-service="vet"><span class="quick-icon">🩺</span>Κτηνίατρος</button>
+          <button class="quick-btn" type="button" data-service="grooming"><span class="quick-icon">🧴</span>Κομμωτήριο</button>
         </div>
       </div>
-
       <div class="bottom-nav">
-        <div class="nav-item active">
-          <div class="nav-icon">🏠</div>
-          <div>Home</div>
-        </div>
-        <div class="nav-item">
-          <div class="nav-icon">🧴</div>
-          <div>Care</div>
-        </div>
-        <div class="nav-item">
-          <div class="nav-icon">🩺</div>
-          <div>Health</div>
-        </div>
-        <div class="nav-item">
-          <div class="nav-icon">👤</div>
-          <div>Profile</div>
-        </div>
+        <button class="nav-item active" type="button" id="homeNav"><span class="nav-icon">🏠</span><span>Αρχική</span></button>
+        <button class="nav-item" type="button" data-service="grooming"><span class="nav-icon">✂️</span><span>Περιποίηση</span></button>
+        <button class="nav-item" type="button" data-service="vet"><span class="nav-icon">🩺</span><span>Υγεία</span></button>
+        <button class="nav-item" type="button" id="appointmentsNav"><span class="nav-icon">📅</span><span>Ραντεβού</span></button>
       </div>
     </div>
+
+    <div class="modal-backdrop" id="bookingBackdrop" role="dialog" aria-modal="true" aria-labelledby="bookingTitle">
+      <form class="booking-modal" id="bookingForm">
+        <div class="modal-heading"><h2 id="bookingTitle">Κλείσε ραντεβού</h2><button class="close-modal" type="button" id="closeModal" aria-label="Κλείσιμο">×</button></div>
+        <p class="modal-subtitle">Επίλεξε υπηρεσία, επαγγελματία και ώρα για τον Milo.</p>
+        <div class="field"><label for="serviceType">Υπηρεσία</label><select id="serviceType" required><option value="vet">Κτηνίατρος</option><option value="grooming">Κομμωτήριο ζώων</option></select></div>
+        <div class="field"><label for="provider">Επαγγελματίας</label><select id="provider" required></select></div>
+        <div class="form-row">
+          <div class="field"><label for="bookingDate">Ημερομηνία</label><input id="bookingDate" type="date" required /></div>
+          <div class="field"><label for="bookingTime">Ώρα</label><select id="bookingTime" required><option value="09:00">09:00</option><option value="10:00">10:00</option><option value="11:00">11:00</option><option value="12:00">12:00</option><option value="14:00">14:00</option><option value="15:00">15:00</option><option value="16:00">16:00</option><option value="17:00">17:00</option></select></div>
+        </div>
+        <div class="field"><label for="bookingNotes">Σημείωση (προαιρετικά)</label><textarea id="bookingNotes" placeholder="π.χ. εμβόλιο, κούρεμα και μπάνιο"></textarea></div>
+        <button class="submit-booking" type="submit">Επιβεβαίωση ραντεβού</button>
+      </form>
+    </div>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
   </div>
 
   <script>
     const continueBtn = document.getElementById('continueBtn');
     const screen1 = document.querySelector('.screen-1');
     const screen2 = document.querySelector('.screen-2');
+    const backdrop = document.getElementById('bookingBackdrop');
+    const bookingForm = document.getElementById('bookingForm');
+    const serviceType = document.getElementById('serviceType');
+    const provider = document.getElementById('provider');
+    const bookingDate = document.getElementById('bookingDate');
+    const appointmentList = document.getElementById('appointmentList');
+    const toast = document.getElementById('toast');
+    const STORAGE_KEY = 'pawsly-appointments-v1';
+    let toastTimer;
+
+    const providers = {
+      vet: ['Κτηνιατρείο Happy Paws', 'Dr. Ελένη Παπαδοπούλου', 'Κτηνιατρική Κλινική Αθηνών'],
+      grooming: ['Paws & Bubbles Grooming', 'Pet Salon Μπουκλέ', 'Ο Κήπος των Ζώων']
+    };
+
+    function updateProviders() {
+      provider.innerHTML = providers[serviceType.value].map(name => `<option value="${name}">${name}</option>`).join('');
+    }
+
+    function readAppointments() {
+      try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); }
+      catch { return []; }
+    }
+
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove('show'), 2800);
+    }
+
+    function formatDate(dateString) {
+      return new Date(`${dateString}T12:00:00`).toLocaleDateString('el-GR', { weekday: 'short', day: 'numeric', month: 'short' });
+    }
+
+    function renderAppointments() {
+      const appointments = readAppointments().sort((a, b) => `${a.date} ${a.time}`.localeCompare(`${b.date} ${b.time}`));
+      if (!appointments.length) {
+        appointmentList.innerHTML = '<div class="empty-state">Δεν έχεις προγραμματισμένα ραντεβού. Κλείσε εύκολα επίσκεψη σε κτηνίατρο ή κομμωτήριο ζώων.</div>';
+        return;
+      }
+      appointmentList.innerHTML = appointments.map(item => `
+        <div class="appointment-card">
+          <div class="appointment-emoji">${item.type === 'vet' ? '🩺' : '✂️'}</div>
+          <div class="appointment-info">
+            <div class="appointment-name">${item.type === 'vet' ? 'Κτηνίατρος' : 'Κομμωτήριο ζώων'}</div>
+            <div class="appointment-details">${formatDate(item.date)} • ${item.time}<br>${item.provider}${item.notes ? `<br>${escapeHtml(item.notes)}` : ''}</div>
+          </div>
+          <button class="cancel-btn" type="button" data-cancel="${item.id}">Ακύρωση</button>
+        </div>`).join('');
+      appointmentList.querySelectorAll('[data-cancel]').forEach(button => button.addEventListener('click', () => cancelAppointment(button.dataset.cancel)));
+    }
+
+    function escapeHtml(text) {
+      return String(text).replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
+    }
+
+    function openBooking(type = 'vet') {
+      serviceType.value = type;
+      updateProviders();
+      backdrop.classList.add('open');
+      bookingDate.focus();
+    }
+
+    function closeBooking() { backdrop.classList.remove('open'); }
+
+    function cancelAppointment(id) {
+      const remaining = readAppointments().filter(item => item.id !== id);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(remaining));
+      renderAppointments();
+      showToast('Το ραντεβού ακυρώθηκε.');
+    }
 
     continueBtn.addEventListener('click', () => {
       screen1.classList.add('hidden');
       screen2.classList.add('active');
+      renderAppointments();
     });
+    document.getElementById('backBtn').addEventListener('click', () => {
+      screen2.classList.remove('active');
+      screen1.classList.remove('hidden');
+    });
+    document.getElementById('topBookBtn').addEventListener('click', () => openBooking('vet'));
+    document.getElementById('newBookingInline').addEventListener('click', () => openBooking('vet'));
+    document.getElementById('appointmentsNav').addEventListener('click', () => {
+      document.querySelector('.screen-2').scrollTo({ top: document.getElementById('appointmentList').offsetTop - 25, behavior: 'smooth' });
+      openBooking('vet');
+    });
+    document.getElementById('homeNav').addEventListener('click', () => document.querySelector('.screen-2').scrollTo({ top: 0, behavior: 'smooth' }));
+    document.querySelectorAll('[data-service]').forEach(button => button.addEventListener('click', () => openBooking(button.dataset.service)));
+    document.querySelectorAll('.pet-card').forEach(card => card.addEventListener('click', () => {
+      document.querySelectorAll('.pet-card').forEach(item => { item.classList.remove('selected'); item.querySelector('.check')?.remove(); });
+      card.classList.add('selected');
+      const check = document.createElement('span'); check.className = 'check'; check.textContent = '✓'; card.prepend(check);
+    }));
+    serviceType.addEventListener('change', updateProviders);
+    document.getElementById('closeModal').addEventListener('click', closeBooking);
+    backdrop.addEventListener('click', event => { if (event.target === backdrop) closeBooking(); });
+    document.addEventListener('keydown', event => { if (event.key === 'Escape') closeBooking(); });
+
+    bookingForm.addEventListener('submit', event => {
+      event.preventDefault();
+      if (!bookingForm.reportValidity()) return;
+      const appointment = {
+        id: `${Date.now()}-${Math.random().toString(16).slice(2)}`,
+        type: serviceType.value,
+        provider: provider.value,
+        date: bookingDate.value,
+        time: document.getElementById('bookingTime').value,
+        notes: document.getElementById('bookingNotes').value.trim()
+      };
+      const appointments = readAppointments();
+      appointments.push(appointment);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(appointments));
+      bookingForm.reset();
+      serviceType.value = 'vet';
+      updateProviders();
+      closeBooking();
+      renderAppointments();
+      showToast('Το ραντεβού καταχωρήθηκε με επιτυχία!');
+    });
+
+    bookingDate.min = new Date().toISOString().split('T')[0];
+    updateProviders();
   </script>
 </body>
 </html>
