@@ -1,55 +1,238 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="el">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#f7f9fd" />
-  <title>PetIt — Pet care</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f7f9fd">
+  <title>PetIt — Φροντίδα κατοικιδίων</title>
   <style>
-    *{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:Arial,Helvetica,sans-serif;background:linear-gradient(135deg,#edf3ff,#f7f9fd);display:flex;align-items:center;justify-content:center;padding:20px;color:#111827}button,input,select,textarea{font:inherit}button{cursor:pointer}.phone{width:390px;height:844px;background:#fff;border-radius:34px;padding:12px;box-shadow:0 30px 60px #0002;border:1px solid #e9edf4;position:relative;overflow:hidden}.notch{position:absolute;z-index:4;top:0;left:50%;transform:translateX(-50%);width:150px;height:26px;background:#111827;border-radius:0 0 18px 18px}.screen{width:100%;height:100%;background:#f7f9fd;border-radius:26px;padding:30px 16px 14px;position:relative;overflow:hidden}.screen-2{display:none;overflow-y:auto;padding-bottom:96px;scrollbar-width:none}.screen-2::-webkit-scrollbar{display:none}.screen-2.active{display:block}.screen-1.hidden{display:none}.topbar,.topbar2{display:flex;justify-content:space-between;align-items:center;margin:8px 0 18px}.brand{font-size:26px;font-weight:900;letter-spacing:-.7px;color:#2f6fed}.brand-mark{display:flex;align-items:center;gap:7px}.brand-paw{font-size:22px}.menu{width:22px;height:18px;display:flex;flex-direction:column;justify-content:space-between}.menu span{height:2px;background:#374151;border-radius:2px}.welcome{font-size:12px;color:#6b7280;font-weight:700;margin-bottom:8px}.heading{font-size:28px;line-height:1.2;margin:0 0 18px;font-weight:800}.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:18px}.pet-card{position:relative;border-radius:22px;border:1px solid #edf0f5;min-height:126px;padding:16px 10px 10px;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 5px 14px #0f172a0a;background:#fff}.pet-card.selected{border:2px solid #2f6fed;background:#f2f8ff}.pet-card:nth-child(1){background:linear-gradient(180deg,#f9fbff,#eef5ff)}.pet-card:nth-child(2){background:linear-gradient(180deg,#faf7ff,#f3ecff)}.pet-card:nth-child(3){background:linear-gradient(180deg,#fffaf3,#fff2d9)}.pet-card:nth-child(4){background:linear-gradient(180deg,#f1fffd,#defcf8)}.pet-emoji{font-size:34px;margin-bottom:8px}.pet-name{font-size:15px;font-weight:700;text-align:center}.pet-meta{font-size:11px;color:#6b7280;margin-top:2px}.check{position:absolute;right:10px;top:10px;width:22px;height:22px;background:#2f6fed;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700}.cta{position:absolute;left:16px;right:16px;bottom:20px;height:58px;border:0;border-radius:18px;background:linear-gradient(135deg,#2f6fed,#5d7ff5);color:#fff;font-size:18px;font-weight:700;box-shadow:0 12px 22px #2f6fed40}.back,.plus{border:0;background:transparent;padding:0;color:#1f2937;line-height:1}.back{font-size:28px;font-weight:700}.plus{font-size:30px}.pet-title{font-size:18px;color:#111827;font-weight:700}.hero{background:linear-gradient(135deg,#2f6fed,#6b7df6);border-radius:24px;padding:18px 16px;box-shadow:0 12px 20px #2f6fed2e;color:#fff;margin-bottom:16px}.hero-row{display:flex;align-items:center;gap:12px;margin-bottom:12px}.pet-icon{width:50px;height:50px;border-radius:16px;background:#ffffff2e;display:flex;align-items:center;justify-content:center;font-size:28px}.hero-name{font-size:24px;font-weight:800;margin:0}.hero .pet-meta{color:#fff;opacity:.88;font-size:12px;margin-top:3px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}.stat{background:#ffffff1f;border:1px solid #ffffff26;border-radius:14px;padding:10px 8px;text-align:center}.stat-label{font-size:10px;opacity:.8;margin-bottom:4px}.stat-value{font-size:18px;font-weight:800}.section-title{font-size:15px;font-weight:800;margin:18px 0 10px}.summary-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.summary-card{background:#fff;border-radius:16px;border:1px solid #edf0f5;box-shadow:0 6px 14px #0f172a0a;padding:12px 8px;text-align:center}.summary-card .label{font-size:11px;color:#6b7280;margin-bottom:8px;font-weight:600}.summary-card .value{font-size:20px;font-weight:800}.tasks,.appointment-list{background:#fff;border-radius:18px;border:1px solid #edf0f5;box-shadow:0 6px 14px #0f172a0a;padding:8px 12px;margin-top:12px}.task-item{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid #f0f2f5;color:#1f2937;font-size:14px;font-weight:600}.task-item:last-child{border-bottom:0}.task-item .check{position:static;width:18px;height:18px;font-size:12px;flex:0 0 auto}.pending{width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#6b7280;background:#e5e7eb;flex:0 0 auto}.quick{margin-top:16px}.quick-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:8px}.quick-btn{background:#fff;border:1px solid #edf0f5;border-radius:14px;box-shadow:0 6px 12px #0f172a08;padding:11px 4px 10px;text-align:center;font-size:11px;font-weight:700;color:#111827}.quick-icon{font-size:20px;display:block;margin-bottom:6px}.appointment-card{display:flex;align-items:flex-start;gap:10px;padding:12px 0;border-bottom:1px solid #f0f2f5}.appointment-card:last-child{border-bottom:0}.appointment-emoji{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:#eef4ff;font-size:20px;flex:0 0 auto}.appointment-info{flex:1;min-width:0}.appointment-name{font-size:13px;font-weight:800}.appointment-details{color:#6b7280;font-size:11px;line-height:1.5;margin-top:3px}.cancel-btn{border:0;background:#fff1f2;color:#be123c;border-radius:9px;font-size:10px;font-weight:700;padding:7px}.empty-state{color:#6b7280;font-size:12px;line-height:1.5;padding:12px 2px}.bottom-nav{position:absolute;left:12px;right:12px;bottom:12px;height:68px;background:#fffffff2;border:1px solid #edf0f5;border-radius:20px;display:grid;grid-template-columns:repeat(4,1fr);align-items:center;box-shadow:0 -8px 18px #0f172a0a;z-index:2}.nav-item{border:0;background:transparent;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#6b7280;font-size:10px;font-weight:700;gap:4px;height:100%}.nav-item.active{color:#2f6fed}.nav-icon{font-size:19px;line-height:1}.modal-backdrop{display:none;position:absolute;inset:0;z-index:5;background:#1118277a;align-items:flex-end;justify-content:center}.modal-backdrop.open{display:flex}.booking-modal{width:100%;max-height:92%;overflow-y:auto;background:#f7f9fd;border-radius:26px 26px 14px 14px;padding:22px 18px 24px;box-shadow:0 -10px 30px #0003}.modal-heading{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px}.modal-heading h2{font-size:21px;margin:0}.close-modal{border:0;background:#e9eef8;color:#374151;width:32px;height:32px;border-radius:50%;font-size:20px}.modal-subtitle{color:#6b7280;font-size:12px;margin:5px 0 16px}.field{margin:12px 0}.field label{display:block;font-size:12px;font-weight:700;margin-bottom:6px;color:#374151}.field input,.field select,.field textarea{width:100%;border:1px solid #dfe5ef;border-radius:12px;background:#fff;padding:12px;color:#111827}.field textarea{min-height:68px;resize:vertical}.form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.submit-booking{width:100%;border:0;border-radius:14px;padding:14px;margin-top:8px;color:#fff;font-weight:800;background:linear-gradient(135deg,#2f6fed,#5d7ff5)}.toast{position:absolute;z-index:7;left:24px;right:24px;bottom:92px;background:#111827;color:#fff;border-radius:12px;padding:12px 14px;text-align:center;font-size:12px;opacity:0;pointer-events:none;transition:.2s}.toast.show{opacity:1}@media(max-width:420px){body{padding:0}.phone{width:100vw;height:100vh;border-radius:0;box-shadow:none}.screen{border-radius:0}}
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; display: grid; place-items: center; padding: 18px; font-family: Arial, Helvetica, sans-serif; color: #111827; background: linear-gradient(135deg,#edf3ff,#f7f9fd); }
+    button, input, select, textarea { font: inherit; }
+    button { cursor: pointer; }
+    .phone { position: relative; width: 390px; height: min(844px, calc(100vh - 24px)); min-height: 650px; padding: 12px; overflow: hidden; border: 1px solid #e9edf4; border-radius: 34px; background: white; box-shadow: 0 30px 60px #0002; }
+    .notch { position: absolute; z-index: 4; top: 0; left: 50%; width: 150px; height: 26px; transform: translateX(-50%); border-radius: 0 0 18px 18px; background: #111827; }
+    .screen { position: relative; width: 100%; height: 100%; padding: 30px 16px 18px; overflow: hidden; border-radius: 26px; background: #f7f9fd; }
+    .screen-2 { display: none; overflow-y: auto; padding-bottom: 96px; scrollbar-width: none; }
+    .screen-2::-webkit-scrollbar { display: none; }
+    .screen-2.active { display: block; }
+    .screen-1.hidden { display: none; }
+    .topbar, .topbar2 { display: flex; align-items: center; justify-content: space-between; margin: 8px 0 18px; }
+    .brand-mark { display: flex; align-items: center; gap: 7px; }
+    .brand-paw { font-size: 22px; }
+    .brand { color: #2f6fed; font-size: 26px; font-weight: 900; letter-spacing: -.7px; }
+    .menu { display: flex; width: 22px; height: 18px; flex-direction: column; justify-content: space-between; }
+    .menu span { height: 2px; border-radius: 2px; background: #374151; }
+    .welcome { margin-bottom: 8px; color: #6b7280; font-size: 12px; font-weight: 700; }
+    .heading { margin: 0 0 18px; font-size: 28px; line-height: 1.2; font-weight: 800; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .pet-card { position: relative; display: flex; min-height: 126px; flex-direction: column; align-items: center; justify-content: center; padding: 16px 10px 10px; border: 1px solid #edf0f5; border-radius: 22px; background: white; box-shadow: 0 5px 14px #0f172a0a; }
+    .pet-card:nth-child(1) { background: linear-gradient(180deg,#f9fbff,#eef5ff); }
+    .pet-card:nth-child(2) { background: linear-gradient(180deg,#faf7ff,#f3ecff); }
+    .pet-card:nth-child(3) { background: linear-gradient(180deg,#fffaf3,#fff2d9); }
+    .pet-card:nth-child(4) { background: linear-gradient(180deg,#f1fffd,#defcf8); }
+    .pet-card.selected { border: 2px solid #2f6fed; }
+    .pet-emoji { margin-bottom: 8px; font-size: 34px; }
+    .pet-name { font-size: 15px; font-weight: 700; }
+    .pet-meta { margin-top: 3px; color: #6b7280; font-size: 11px; }
+    .check { position: absolute; top: 9px; right: 9px; display: grid; width: 21px; height: 21px; place-items: center; border-radius: 50%; background: #2f6fed; color: #fff; font-size: 13px; }
+    .cta, .primary { border: 0; border-radius: 16px; background: linear-gradient(135deg,#2f6fed,#5d7ff5); color: white; font-weight: 800; box-shadow: 0 10px 20px #2f6fed30; }
+    .cta { position: absolute; right: 16px; bottom: 20px; left: 16px; height: 56px; font-size: 17px; }
+    .back, .plus { border: 0; background: transparent; color: #1f2937; }
+    .back { font-size: 28px; }
+    .plus { font-size: 30px; }
+    .hero { margin-bottom: 16px; padding: 18px 16px; border-radius: 24px; background: linear-gradient(135deg,#2f6fed,#6b7df6); color: white; box-shadow: 0 12px 20px #2f6fed2e; }
+    .hero-row { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+    .pet-icon { display: grid; width: 50px; height: 50px; place-items: center; border-radius: 16px; background: #ffffff2e; font-size: 28px; }
+    .hero-name { margin: 0; font-size: 24px; font-weight: 800; }
+    .hero .pet-meta { color: white; font-size: 12px; }
+    .stats, .summary-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 9px; }
+    .stats { margin-top: 12px; }
+    .stat { padding: 10px 5px; border: 1px solid #ffffff26; border-radius: 14px; background: #ffffff1f; text-align: center; }
+    .stat-label { margin-bottom: 4px; font-size: 10px; opacity: .85; }
+    .stat-value { font-size: 17px; font-weight: 800; }
+    .section-title { display: flex; align-items: center; justify-content: space-between; margin: 18px 0 10px; font-size: 15px; font-weight: 800; }
+    .summary-card { padding: 12px 7px; border: 1px solid #edf0f5; border-radius: 16px; background: white; box-shadow: 0 6px 14px #0f172a0a; text-align: center; }
+    .summary-card .label { margin-bottom: 7px; color: #6b7280; font-size: 11px; font-weight: 600; }
+    .summary-card .value { font-size: 19px; font-weight: 800; }
+    .tasks, .appointment-list { margin-top: 10px; padding: 8px 12px; border: 1px solid #edf0f5; border-radius: 18px; background: white; box-shadow: 0 6px 14px #0f172a0a; }
+    .task-item { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid #f0f2f5; color: #1f2937; font-size: 13px; font-weight: 600; }
+    .task-item:last-child { border-bottom: 0; }
+    .task-check, .pending { display: grid; width: 18px; height: 18px; flex: 0 0 auto; place-items: center; border-radius: 50%; }
+    .task-check { background: #2f6fed; color: white; font-size: 12px; }
+    .pending { background: #e5e7eb; color: #6b7280; }
+    .quick-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 8px; }
+    .quick-btn { padding: 10px 3px; border: 1px solid #edf0f5; border-radius: 14px; background: white; color: #111827; font-size: 10px; font-weight: 700; }
+    .quick-icon { display: block; margin-bottom: 5px; font-size: 20px; }
+    .appointment-card { display: flex; align-items: flex-start; gap: 9px; padding: 11px 0; border-bottom: 1px solid #f0f2f5; }
+    .appointment-card:last-child { border-bottom: 0; }
+    .appointment-emoji { display: grid; width: 36px; height: 36px; flex: 0 0 auto; place-items: center; border-radius: 11px; background: #eef4ff; }
+    .appointment-info { flex: 1; min-width: 0; }
+    .appointment-name { font-size: 12px; font-weight: 800; }
+    .appointment-details { margin-top: 3px; color: #6b7280; font-size: 10px; line-height: 1.5; }
+    .cancel-btn { padding: 6px; border: 0; border-radius: 8px; background: #fff1f2; color: #be123c; font-size: 10px; font-weight: 700; }
+    .empty-state { padding: 10px 2px; color: #6b7280; font-size: 11px; line-height: 1.5; }
+    .bottom-nav { position: absolute; z-index: 2; right: 12px; bottom: 12px; left: 12px; display: grid; height: 68px; grid-template-columns: repeat(4,1fr); align-items: center; border: 1px solid #edf0f5; border-radius: 20px; background: #fffffff2; box-shadow: 0 -8px 18px #0f172a0a; }
+    .nav-item { display: flex; height: 100%; flex-direction: column; align-items: center; justify-content: center; gap: 4px; border: 0; background: transparent; color: #6b7280; font-size: 9px; font-weight: 700; }
+    .nav-item.active { color: #2f6fed; }
+    .nav-icon { font-size: 18px; }
+    .modal-backdrop { position: absolute; z-index: 5; inset: 0; display: none; align-items: flex-end; justify-content: center; background: #1118277a; }
+    .modal-backdrop.open { display: flex; }
+    .modal { width: 100%; max-height: 92%; overflow-y: auto; padding: 22px 18px 24px; border-radius: 25px 25px 14px 14px; background: #f7f9fd; box-shadow: 0 -10px 30px #0003; }
+    .modal-head { display: flex; align-items: center; justify-content: space-between; }
+    .modal-head h2 { margin: 0; font-size: 21px; }
+    .close { width: 32px; height: 32px; border: 0; border-radius: 50%; background: #e9eef8; font-size: 20px; }
+    .subtext { margin: 6px 0 15px; color: #6b7280; font-size: 12px; line-height: 1.5; }
+    .field { margin: 12px 0; }
+    .field label { display: block; margin-bottom: 6px; color: #374151; font-size: 12px; font-weight: 700; }
+    .field input, .field select, .field textarea { width: 100%; padding: 11px; border: 1px solid #dfe5ef; border-radius: 11px; background: white; color: #111827; }
+    .field textarea { min-height: 62px; resize: vertical; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
+    .primary { width: 100%; padding: 13px; margin-top: 6px; }
+    .amounts { display: grid; grid-template-columns: repeat(4,1fr); gap: 7px; margin: 8px 0 12px; }
+    .amount-btn { padding: 10px 3px; border: 1px solid #dfe5ef; border-radius: 11px; background: white; color: #374151; font-weight: 700; }
+    .amount-btn.selected { border-color: #2f6fed; background: #eef4ff; color: #2f6fed; }
+    .demo-note { padding: 10px; border-radius: 11px; background: #fff7e6; color: #805b10; font-size: 10px; line-height: 1.5; }
+    .toast { position: absolute; z-index: 8; right: 24px; bottom: 92px; left: 24px; padding: 12px; border-radius: 12px; background: #111827; color: white; text-align: center; font-size: 12px; opacity: 0; pointer-events: none; transition: opacity .2s; }
+    .toast.show { opacity: 1; }
+    @media(max-width:420px) { body { padding: 0; } .phone { width: 100vw; height: 100dvh; min-height: 0; border: 0; border-radius: 0; box-shadow: none; } .screen { border-radius: 0; } }
   </style>
 </head>
 <body>
-  <div class="phone">
+  <main class="phone">
     <div class="notch"></div>
-    <div class="screen screen-1">
-      <div class="topbar"><div class="brand-mark"><span class="brand-paw">🐾</span><span class="brand">PetIt</span></div><div class="menu" aria-label="Menu"><span></span><span></span><span></span></div></div>
-      <div class="welcome">Welcome back</div><h1 class="heading">Which pet do you have?</h1>
+    <section class="screen screen-1" aria-label="Επιλογή κατοικιδίου">
+      <header class="topbar"><div class="brand-mark"><span class="brand-paw">🐾</span><span class="brand">PetIt</span></div><div class="menu" aria-label="Μενού"><span></span><span></span><span></span></div></header>
+      <div class="welcome">Καλώς ήρθες ξανά</div>
+      <h1 class="heading">Τι κατοικίδιο έχεις;</h1>
       <div class="grid" id="petGrid">
-        <button class="pet-card selected" type="button" data-pet="dog" data-emoji="🐶" data-name="Milo"><span class="check">✓</span><span class="pet-emoji">🐶</span><span class="pet-name">Dog</span><span class="pet-meta">Good fit</span></button>
-        <button class="pet-card" type="button" data-pet="cat" data-emoji="🐱" data-name="Luna"><span class="pet-emoji">🐱</span><span class="pet-name">Cat</span><span class="pet-meta">8 pets</span></button>
-        <button class="pet-card" type="button" data-pet="small" data-emoji="🐹" data-name="Coco"><span class="pet-emoji">🐹</span><span class="pet-name">Small pet</span><span class="pet-meta">3 pets</span></button>
-        <button class="pet-card" type="button" data-pet="fish" data-emoji="🐠" data-name="Nemo"><span class="pet-emoji">🐠</span><span class="pet-name">Fish</span><span class="pet-meta">5 pets</span></button>
+        <button class="pet-card selected" type="button" data-pet="dog" data-emoji="🐶" data-name="Milo"><span class="check">✓</span><span class="pet-emoji">🐶</span><span class="pet-name">Σκύλος</span><span class="pet-meta">Επιλογή κατοικιδίου</span></button>
+        <button class="pet-card" type="button" data-pet="cat" data-emoji="🐱" data-name="Luna"><span class="pet-emoji">🐱</span><span class="pet-name">Γάτα</span><span class="pet-meta">8 κατοικίδια</span></button>
+        <button class="pet-card" type="button" data-pet="small" data-emoji="🐹" data-name="Coco"><span class="pet-emoji">🐹</span><span class="pet-name">Μικρό ζώο</span><span class="pet-meta">3 κατοικίδια</span></button>
+        <button class="pet-card" type="button" data-pet="fish" data-emoji="🐠" data-name="Nemo"><span class="pet-emoji">🐠</span><span class="pet-name">Ψάρι</span><span class="pet-meta">5 κατοικίδια</span></button>
       </div>
-      <button class="cta" id="continueBtn">Continue</button>
-    </div>
-    <div class="screen screen-2">
-      <div class="topbar2"><button class="back" id="backBtn" aria-label="Back">←</button><div class="brand-mark"><span class="brand-paw">🐾</span><span class="brand">PetIt</span></div><button class="plus" id="topBookBtn" aria-label="Book appointment">＋</button></div>
-      <div class="hero"><div class="hero-row"><div class="pet-icon" id="petIcon">🐶</div><div><h2 class="hero-name" id="petHeroName">Milo</h2><div class="pet-meta" id="petMeta">Dog • 3 years old • 12.5 kg</div></div></div><div class="stats"><div class="stat"><div class="stat-label">Meals</div><div class="stat-value">2/3</div></div><div class="stat"><div class="stat-label">Walks</div><div class="stat-value">1/2</div></div><div class="stat"><div class="stat-label">Health</div><div class="stat-value">Good</div></div></div></div>
-      <div class="section-title">Summary</div><div class="summary-grid"><div class="summary-card"><div class="label">Meals</div><div class="value">2/3</div></div><div class="summary-card"><div class="label">Walks</div><div class="value">1/2</div></div><div class="summary-card"><div class="label">Health</div><div class="value">Good</div></div></div>
-      <div class="section-title">My appointments <button id="newBookingInline" style="float:right;border:0;background:transparent;color:#2f6fed;font-size:12px;font-weight:800;padding:0">＋ New</button></div><div class="appointment-list" id="appointmentList" aria-live="polite"></div>
-      <div class="section-title">Today's tasks</div><div class="tasks"><div class="task-item"><span class="check">✓</span><span>Food &amp; water</span></div><div class="task-item"><span class="check">✓</span><span>Morning walk</span></div><div class="task-item"><span class="check">✓</span><span>Medication</span></div><div class="task-item"><span class="pending">•</span><span>Grooming appointment</span></div></div>
-      <div class="quick"><div class="section-title">Quick actions</div><div class="quick-grid"><button class="quick-btn" type="button"><span class="quick-icon">🍽️</span>Feed</button><button class="quick-btn" type="button"><span class="quick-icon">🚶</span>Walk</button><button class="quick-btn" type="button" data-service="vet"><span class="quick-icon">🩺</span>Vet</button><button class="quick-btn" type="button" data-service="grooming"><span class="quick-icon">✂️</span>Grooming</button></div></div>
-      <div class="bottom-nav"><button class="nav-item active" type="button" id="homeNav"><span class="nav-icon">🏠</span><span>Home</span></button><button class="nav-item" type="button" data-service="grooming"><span class="nav-icon">✂️</span><span>Care</span></button><button class="nav-item" type="button" data-service="vet"><span class="nav-icon">🩺</span><span>Health</span></button><button class="nav-item" type="button" id="appointmentsNav"><span class="nav-icon">📅</span><span>Appointments</span></button></div>
-    </div>
-    <div class="modal-backdrop" id="bookingBackdrop" role="dialog" aria-modal="true" aria-labelledby="bookingTitle"><form class="booking-modal" id="bookingForm"><div class="modal-heading"><h2 id="bookingTitle">Book an appointment</h2><button class="close-modal" type="button" id="closeModal" aria-label="Close">×</button></div><p class="modal-subtitle" id="bookingSubtitle">Choose a service, provider and time for Milo.</p><div class="field"><label for="serviceType">Service</label><select id="serviceType" required><option value="vet">Veterinarian</option><option value="grooming">Pet grooming</option></select></div><div class="field"><label for="provider">Provider</label><select id="provider" required></select></div><div class="form-row"><div class="field"><label for="bookingDate">Date</label><input id="bookingDate" type="date" required /></div><div class="field"><label for="bookingTime">Time</label><select id="bookingTime" required><option>09:00</option><option>10:00</option><option>11:00</option><option>12:00</option><option>14:00</option><option>15:00</option><option>16:00</option><option>17:00</option></select></div></div><div class="field"><label for="bookingNotes">Note (optional)</label><textarea id="bookingNotes" placeholder="e.g. vaccination, haircut and bath"></textarea></div><button class="submit-booking" type="submit">Confirm appointment</button></form></div>
+      <button class="cta" id="continueBtn">Συνέχεια</button>
+    </section>
+
+    <section class="screen screen-2" aria-label="Αρχική σελίδα PetIt">
+      <header class="topbar2"><button class="back" id="backBtn" aria-label="Πίσω">←</button><div class="brand-mark"><span class="brand-paw">🐾</span><span class="brand">PetIt</span></div><button class="plus" id="topBookBtn" aria-label="Κλείσε ραντεβού">＋</button></header>
+      <div class="hero"><div class="hero-row"><div class="pet-icon" id="petIcon">🐶</div><div><h2 class="hero-name" id="petHeroName">Milo</h2><div class="pet-meta" id="petMeta">Σκύλος • 3 ετών • 12,5 kg</div></div></div><div class="stats"><div class="stat"><div class="stat-label">Γεύματα</div><div class="stat-value">2/3</div></div><div class="stat"><div class="stat-label">Βόλτες</div><div class="stat-value">1/2</div></div><div class="stat"><div class="stat-label">Υγεία</div><div class="stat-value">Καλή</div></div></div></div>
+      <div class="section-title">Η σημερινή εικόνα</div>
+      <div class="summary-grid"><div class="summary-card"><div class="label">Γεύματα</div><div class="value">2/3</div></div><div class="summary-card"><div class="label">Βόλτες</div><div class="value">1/2</div></div><div class="summary-card"><div class="label">Υγεία</div><div class="value">Καλή</div></div></div>
+      <div class="section-title">Τα ραντεβού μου <button id="newBookingInline" style="border:0;background:transparent;color:#2f6fed;font-size:12px;font-weight:800">＋ Νέο</button></div>
+      <div class="appointment-list" id="appointmentList" aria-live="polite"></div>
+      <div class="section-title">Οι σημερινές υποχρεώσεις</div>
+      <div class="tasks"><div class="task-item"><span class="task-check">✓</span><span>Φαγητό και νερό</span></div><div class="task-item"><span class="task-check">✓</span><span>Πρωινή βόλτα</span></div><div class="task-item"><span class="task-check">✓</span><span>Φαρμακευτική αγωγή</span></div><div class="task-item"><span class="pending">•</span><span>Περιποίηση</span></div></div>
+      <div class="section-title">Γρήγορες ενέργειες</div>
+      <div class="quick-grid"><button class="quick-btn" type="button"><span class="quick-icon">🍽️</span>Ταΐσμα</button><button class="quick-btn" type="button"><span class="quick-icon">🚶</span>Βόλτα</button><button class="quick-btn" type="button" data-service="vet"><span class="quick-icon">🩺</span>Κτηνίατρος</button><button class="quick-btn" type="button" data-service="grooming"><span class="quick-icon">✂️</span>Κομμωτήριο</button></div>
+      <div class="bottom-nav"><button class="nav-item active" type="button" id="homeNav"><span class="nav-icon">🏠</span><span>Αρχική</span></button><button class="nav-item" type="button" data-service="grooming"><span class="nav-icon">✂️</span><span>Φροντίδα</span></button><button class="nav-item" type="button" data-service="vet"><span class="nav-icon">🩺</span><span>Υγεία</span></button><button class="nav-item" type="button" id="donationNav"><span class="nav-icon">💛</span><span>Δωρεά</span></button></div>
+    </section>
+
+    <div class="modal-backdrop" id="bookingBackdrop" role="dialog" aria-modal="true" aria-labelledby="bookingTitle"><form class="modal" id="bookingForm"><div class="modal-head"><h2 id="bookingTitle">Κλείσε ραντεβού</h2><button class="close" type="button" data-close="booking" aria-label="Κλείσιμο">×</button></div><p class="subtext" id="bookingSubtitle">Επίλεξε υπηρεσία και ώρα για το κατοικίδιό σου.</p><div class="field"><label for="serviceType">Υπηρεσία</label><select id="serviceType" required><option value="vet">Κτηνίατρος</option><option value="grooming">Κομμωτήριο ζώων</option></select></div><div class="field"><label for="provider">Επαγγελματίας</label><select id="provider" required></select></div><div class="form-row"><div class="field"><label for="bookingDate">Ημερομηνία</label><input id="bookingDate" type="date" required></div><div class="field"><label for="bookingTime">Ώρα</label><select id="bookingTime"><option>09:00</option><option>10:00</option><option>11:00</option><option>12:00</option><option>14:00</option><option>15:00</option><option>16:00</option><option>17:00</option></select></div></div><div class="field"><label for="bookingNotes">Σημείωση (προαιρετικά)</label><textarea id="bookingNotes" placeholder="π.χ. εμβόλιο, κούρεμα και μπάνιο"></textarea></div><button class="primary" type="submit">Επιβεβαίωση ραντεβού</button></form></div>
+
+    <div class="modal-backdrop" id="donationBackdrop" role="dialog" aria-modal="true" aria-labelledby="donationTitle"><form class="modal" id="donationForm"><div class="modal-head"><h2 id="donationTitle">Στήριξε τα ζωάκια 💛</h2><button class="close" type="button" data-close="donation" aria-label="Κλείσιμο">×</button></div><p class="subtext">Επίλεξε φιλοζωική οργάνωση και ποσό δωρεάς.</p><div class="field"><label for="organization">Οργάνωση</label><select id="organization" required><option value="">Επίλεξε οργάνωση</option><option>Τοπικό καταφύγιο αδέσποτων (demo)</option><option>Φίλοι των ζώων (demo)</option><option>Δίκτυο διάσωσης ζώων (demo)</option></select></div><label style="font-size:12px;font-weight:700">Ποσό δωρεάς</label><div class="amounts"><button class="amount-btn selected" type="button" data-amount="5">5 €</button><button class="amount-btn" type="button" data-amount="10">10 €</button><button class="amount-btn" type="button" data-amount="20">20 €</button><button class="amount-btn" type="button" data-amount="other">Άλλο</button></div><div class="field" id="customAmountField" hidden><label for="customAmount">Ποσό σε ευρώ</label><input id="customAmount" type="number" min="1" max="1000" step="1" placeholder="π.χ. 15"></div><p class="demo-note">Πρωτότυπο επίδειξης: δεν πραγματοποιείται πραγματική χρέωση ή μεταφορά χρημάτων. Οι οργανώσεις είναι ενδεικτικές.</p><button class="primary" type="submit">Συνέχεια στη δωρεά</button></form></div>
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  </div>
+  </main>
+
   <script>
-    const screen1=document.querySelector('.screen-1'),screen2=document.querySelector('.screen-2'),backdrop=document.getElementById('bookingBackdrop'),form=document.getElementById('bookingForm'),typeSelect=document.getElementById('serviceType'),provider=document.getElementById('provider'),dateInput=document.getElementById('bookingDate'),list=document.getElementById('appointmentList'),toast=document.getElementById('toast'),KEY='petit-appointments-v1';
-    const providers={vet:['Happy Paws Veterinary Clinic','Dr. Elena Papadopoulou','Athens Veterinary Clinic'],grooming:['Paws & Bubbles Grooming','Pet Salon Boucle','The Pet Garden']};
-    const species={dog:'Dog',cat:'Cat',small:'Small pet',fish:'Fish'};let selectedPet={type:'dog',emoji:'🐶',name:'Milo'};let toastTimer;
-    function updateProviders(){provider.innerHTML=providers[typeSelect.value].map(name=>`<option value="${name}">${name}</option>`).join('')}
-    function read(){try{return JSON.parse(localStorage.getItem(KEY)||'[]')}catch{return[]}}
-    function notify(message){toast.textContent=message;toast.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>toast.classList.remove('show'),2600)}
-    function escapeHtml(text){return String(text).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-    function render(){const items=read().sort((a,b)=>(a.date+' '+a.time).localeCompare(b.date+' '+b.time));if(!items.length){list.innerHTML='<div class="empty-state">No upcoming appointments. Book a visit with a vet or pet groomer.</div>';return}list.innerHTML=items.map(item=>`<div class="appointment-card"><div class="appointment-emoji">${item.type==='vet'?'🩺':'✂️'}</div><div class="appointment-info"><div class="appointment-name">${item.type==='vet'?'Veterinarian':'Pet grooming'}</div><div class="appointment-details">${new Date(item.date+'T12:00:00').toLocaleDateString('en-US',{weekday:'short',day:'numeric',month:'short'})} • ${item.time}<br>${escapeHtml(item.provider)}${item.notes?'<br>'+escapeHtml(item.notes):''}</div></div><button class="cancel-btn" type="button" data-cancel="${escapeHtml(item.id)}">Cancel</button></div>`).join('');list.querySelectorAll('[data-cancel]').forEach(button=>button.addEventListener('click',()=>{localStorage.setItem(KEY,JSON.stringify(read().filter(item=>item.id!==button.dataset.cancel)));render();notify('Appointment cancelled.')}))}
-    function showSelectedPet(){document.getElementById('petIcon').textContent=selectedPet.emoji;document.getElementById('petHeroName').textContent=selectedPet.name;document.getElementById('petMeta').textContent=species[selectedPet.type]+' • '+(selectedPet.type==='dog'?'3 years old • 12.5 kg':'Your pet');document.getElementById('bookingSubtitle').textContent='Choose a service, provider and time for '+selectedPet.name+'.'}
-    function openBooking(type='vet'){typeSelect.value=type;updateProviders();backdrop.classList.add('open')}
-    function closeBooking(){backdrop.classList.remove('open')}
-    document.querySelectorAll('.pet-card').forEach(card=>card.addEventListener('click',()=>{document.querySelectorAll('.pet-card').forEach(item=>{item.classList.remove('selected');item.querySelector('.check')?.remove()});card.classList.add('selected');const check=document.createElement('span');check.className='check';check.textContent='✓';card.prepend(check);selectedPet={type:card.dataset.pet,emoji:card.dataset.emoji,name:card.dataset.name}}));
-    document.getElementById('continueBtn').addEventListener('click',()=>{showSelectedPet();screen1.classList.add('hidden');screen2.classList.add('active');render()});document.getElementById('backBtn').addEventListener('click',()=>{screen2.classList.remove('active');screen1.classList.remove('hidden')});document.getElementById('topBookBtn').addEventListener('click',()=>openBooking());document.getElementById('newBookingInline').addEventListener('click',()=>openBooking());document.getElementById('appointmentsNav').addEventListener('click',()=>{document.getElementById('appointmentList').scrollIntoView({behavior:'smooth'});openBooking()});document.getElementById('homeNav').addEventListener('click',()=>screen2.scrollTo({top:0,behavior:'smooth'}));document.querySelectorAll('[data-service]').forEach(button=>button.addEventListener('click',()=>openBooking(button.dataset.service)));typeSelect.addEventListener('change',updateProviders);document.getElementById('closeModal').addEventListener('click',closeBooking);backdrop.addEventListener('click',event=>{if(event.target===backdrop)closeBooking()});document.addEventListener('keydown',event=>{if(event.key==='Escape')closeBooking()});
-    form.addEventListener('submit',event=>{event.preventDefault();if(!form.reportValidity())return;const appointment={id:String(Date.now()),pet:selectedPet.name,type:typeSelect.value,provider:provider.value,date:dateInput.value,time:document.getElementById('bookingTime').value,notes:document.getElementById('bookingNotes').value.trim()};const items=read();items.push(appointment);localStorage.setItem(KEY,JSON.stringify(items));form.reset();typeSelect.value='vet';updateProviders();closeBooking();render();notify('Appointment booked successfully!')});dateInput.min=new Date().toISOString().split('T')[0];updateProviders();
+    const $ = (selector) => document.querySelector(selector);
+    const screen1 = $('.screen-1'), screen2 = $('.screen-2');
+    const bookingBackdrop = $('#bookingBackdrop'), donationBackdrop = $('#donationBackdrop');
+    const bookingForm = $('#bookingForm'), donationForm = $('#donationForm');
+    const serviceType = $('#serviceType'), providerSelect = $('#provider');
+    const appointmentsKey = 'petit-appointments-v2';
+    const donationsKey = 'petit-donations-demo-v1';
+    const providers = {
+      vet: ['Κτηνιατρείο Happy Paws (demo)', 'Κτηνιατρική κλινική (demo)'],
+      grooming: ['Pet Salon (demo)', 'Κομμωτήριο ζωών (demo)']
+    };
+    const species = { dog: 'Σκύλος', cat: 'Γάτα', small: 'Μικρό ζώο', fish: 'Ψάρι' };
+    let selectedPet = { type: 'dog', emoji: '🐶', name: 'Milo' };
+    let selectedAmount = 5;
+    let toastTimer;
+
+    function updateProviders() {
+      providerSelect.innerHTML = providers[serviceType.value].map(name => `<option>${name}</option>`).join('');
+    }
+    function readAppointments() {
+      try { return JSON.parse(localStorage.getItem(appointmentsKey) || '[]'); } catch { return []; }
+    }
+    function showToast(message) {
+      const toast = $('#toast'); toast.textContent = message; toast.classList.add('show');
+      clearTimeout(toastTimer); toastTimer = setTimeout(() => toast.classList.remove('show'), 3000);
+    }
+    function escapeHtml(value) {
+      return String(value).replace(/[&<>"']/g, char => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[char]));
+    }
+    function renderAppointments() {
+      const list = $('#appointmentList');
+      const appointments = readAppointments().sort((a,b) => `${a.date} ${a.time}`.localeCompare(`${b.date} ${b.time}`));
+      if (!appointments.length) {
+        list.innerHTML = '<div class="empty-state">Δεν έχεις προγραμματισμένα ραντεβού. Κλείσε επίσκεψη σε κτηνίατρο ή κομμωτήριο ζώων.</div>';
+        return;
+      }
+      list.innerHTML = appointments.map(item => `<div class="appointment-card"><div class="appointment-emoji">${item.type === 'vet' ? '🩺' : '✂️'}</div><div class="appointment-info"><div class="appointment-name">${item.type === 'vet' ? 'Κτηνίατρος' : 'Κομμωτήριο ζώων'}</div><div class="appointment-details">${new Date(`${item.date}T12:00:00`).toLocaleDateString('el-GR',{day:'numeric',month:'short'})} • ${escapeHtml(item.time)}<br>${escapeHtml(item.provider)} · ${escapeHtml(item.pet || selectedPet.name)}</div></div><button class="cancel-btn" type="button" data-cancel="${escapeHtml(item.id)}">Ακύρωση</button></div>`).join('');
+      list.querySelectorAll('[data-cancel]').forEach(button => button.addEventListener('click', () => {
+        localStorage.setItem(appointmentsKey, JSON.stringify(readAppointments().filter(item => item.id !== button.dataset.cancel)));
+        renderAppointments(); showToast('Το ραντεβού ακυρώθηκε.');
+      }));
+    }
+    function openBooking(type = 'vet') {
+      serviceType.value = type; updateProviders();
+      $('#bookingSubtitle').textContent = `Επίλεξε υπηρεσία και ώρα για το ${selectedPet.name}.`;
+      bookingBackdrop.classList.add('open');
+    }
+    function closeModal(which) { (which === 'booking' ? bookingBackdrop : donationBackdrop).classList.remove('open'); }
+
+    document.querySelectorAll('.pet-card').forEach(card => card.addEventListener('click', () => {
+      document.querySelectorAll('.pet-card').forEach(item => { item.classList.remove('selected'); item.querySelector('.check')?.remove(); });
+      card.classList.add('selected');
+      const check = document.createElement('span'); check.className = 'check'; check.textContent = '✓'; card.prepend(check);
+      selectedPet = { type: card.dataset.pet, emoji: card.dataset.emoji, name: card.dataset.name };
+    }));
+    $('#continueBtn').addEventListener('click', () => {
+      $('#petIcon').textContent = selectedPet.emoji;
+      $('#petHeroName').textContent = selectedPet.name;
+      $('#petMeta').textContent = selectedPet.type === 'dog' ? 'Σκύλος • 3 ετών • 12,5 kg' : `${species[selectedPet.type]} • Το κατοικίδιό σου`;
+      screen1.classList.add('hidden'); screen2.classList.add('active'); renderAppointments();
+    });
+    $('#backBtn').addEventListener('click', () => { screen2.classList.remove('active'); screen1.classList.remove('hidden'); });
+    $('#topBookBtn').addEventListener('click', () => openBooking());
+    $('#newBookingInline').addEventListener('click', () => openBooking());
+    document.querySelectorAll('[data-service]').forEach(button => button.addEventListener('click', () => openBooking(button.dataset.service)));
+    $('#homeNav').addEventListener('click', () => screen2.scrollTo({ top: 0, behavior: 'smooth' }));
+    $('#donationNav').addEventListener('click', () => donationBackdrop.classList.add('open'));
+    serviceType.addEventListener('change', updateProviders);
+    document.querySelectorAll('[data-close]').forEach(button => button.addEventListener('click', () => closeModal(button.dataset.close)));
+    [bookingBackdrop, donationBackdrop].forEach(backdrop => backdrop.addEventListener('click', event => { if (event.target === backdrop) backdrop.classList.remove('open'); }));
+    document.addEventListener('keydown', event => { if (event.key === 'Escape') { bookingBackdrop.classList.remove('open'); donationBackdrop.classList.remove('open'); } });
+
+    bookingForm.addEventListener('submit', event => {
+      event.preventDefault(); if (!bookingForm.reportValidity()) return;
+      const items = readAppointments();
+      items.push({ id: String(Date.now()), pet: selectedPet.name, type: serviceType.value, provider: providerSelect.value, date: $('#bookingDate').value, time: $('#bookingTime').value, notes: $('#bookingNotes').value.trim() });
+      localStorage.setItem(appointmentsKey, JSON.stringify(items)); bookingForm.reset(); updateProviders(); closeModal('booking'); renderAppointments(); showToast('Το ραντεβού καταχωρήθηκε!');
+    });
+    document.querySelectorAll('[data-amount]').forEach(button => button.addEventListener('click', () => {
+      document.querySelectorAll('[data-amount]').forEach(item => item.classList.remove('selected'));
+      button.classList.add('selected');
+      const custom = button.dataset.amount === 'other'; $('#customAmountField').hidden = !custom;
+      selectedAmount = custom ? null : Number(button.dataset.amount);
+      $('#customAmount').required = custom;
+    }));
+    donationForm.addEventListener('submit', event => {
+      event.preventDefault(); if (!donationForm.reportValidity()) return;
+      const amount = selectedAmount || Number($('#customAmount').value);
+      if (!Number.isFinite(amount) || amount < 1 || amount > 1000) { $('#customAmount').setCustomValidity('Επίλεξε ποσό από 1 έως 1000 ευρώ.'); $('#customAmount').reportValidity(); $('#customAmount').setCustomValidity(''); return; }
+      const records = JSON.parse(localStorage.getItem(donationsKey) || '[]');
+      records.push({ organization: $('#organization').value, amount, date: new Date().toISOString() });
+      localStorage.setItem(donationsKey, JSON.stringify(records)); donationForm.reset();
+      document.querySelectorAll('[data-amount]').forEach(item => item.classList.toggle('selected', item.dataset.amount === '5'));
+      selectedAmount = 5; $('#customAmountField').hidden = true; $('#customAmount').required = false;
+      closeModal('donation'); showToast(`Καταγράφηκε δοκιμαστική δωρεά ${amount} €. Δεν έγινε χρέωση.`);
+    });
+    $('#bookingDate').min = new Date().toISOString().slice(0,10);
+    updateProviders();
   </script>
 </body>
 </html>
